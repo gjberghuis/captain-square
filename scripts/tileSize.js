@@ -26,6 +26,22 @@ Tile.prototype.reveal = function () {
     }
 }
 
+Tile.prototype.checkBomb = function () {
+    this.ctx.beginPath();
+    this.ctx.fillStyle = 'white';
+    this.ctx.fillRect(this.x, this.y, 25 - 1, 25 - 1);
+
+    if (this.isBomb) {
+
+        this.ctx.beginPath();
+        this.ctx.arc(this.x + (25 / 2), this.y + (25 / 2), 5, 0, 2 * Math.PI);
+        this.ctx.fillStyle = 'black';
+        this.ctx.fill();
+        this.ctx.stroke();
+
+    }
+}
+
 Tile.prototype.flag = function () {
     this.ctx.beginPath();
     this.ctx.lineWidth = 2;
@@ -39,3 +55,6 @@ Tile.prototype.flag = function () {
 }
 
 Tile.prototype.isBomb = false;
+Tile.prototype.isFlagged = false;
+Tile.prototype.isRevealed = false;
+Tile.prototype.isCorrect = false;

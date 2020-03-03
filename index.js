@@ -98,7 +98,7 @@ let board = (() => {
         let clickedTile = tiles[tileX][tileY];
 
         if (!rightClick) {
-            clickedTile.reveal();
+            clickedTile.checkBomb();
         } else {
             clickedTile.flag();
         }
