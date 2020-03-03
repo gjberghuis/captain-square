@@ -4,6 +4,10 @@ let game = (() => {
         game;
 
     var init = () => {
+        canvas.oncontextmenu = function (e) {
+            e.preventDefault();
+        };
+
         board.init(canvas, ctx);
     };
 
@@ -77,7 +81,7 @@ let board = (() => {
     var click = (e) => {
         let x = e.offsetX;
         let y = e.offsetY;
-        let rightclick = false;
+        let rightClick = false;
 
         // determine if right click
         if (e.which && e.which === 3) {
@@ -91,10 +95,12 @@ let board = (() => {
         let tileY = Math.floor(x / tileSize);
 
         console.log(tileX, tileY);
-        let clickedtile = tiles[tileX][tileY];
+        let clickedTile = tiles[tileX][tileY];
 
-        if (!rightclick) {
-            clickedtile.reveal();
+        if (!rightClick) {
+            clickedTile.reveal();
+        } else {
+            clickedTile.flag();
         }
     };
 

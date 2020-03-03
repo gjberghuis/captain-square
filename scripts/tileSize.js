@@ -13,7 +13,6 @@ Tile.prototype.draw = function () {
 };
 
 Tile.prototype.reveal = function () {
-    console.log('reveal tile', this.isBomb);
     if (this.isBomb) {
         this.ctx.beginPath();
         this.ctx.fillStyle = 'red';
@@ -25,6 +24,18 @@ Tile.prototype.reveal = function () {
 
         this.ctx.fillRect(this.x, this.y, 25 - 1, 25 - 1);
     }
+}
+
+Tile.prototype.flag = function () {
+    this.ctx.beginPath();
+    this.ctx.lineWidth = 2;
+    this.ctx.strokeStyle = 'orange';
+
+    this.ctx.moveTo(this.x + (25 / 4), this.y + 21);
+    this.ctx.lineTo(this.x + (25 / 4), this.y + 4);
+    this.ctx.lineTo(this.x + ((25 / 4) * 3), this.y + 12);
+    this.ctx.lineTo(this.x + (25 / 4), this.y + 16);
+    this.ctx.stroke();
 }
 
 Tile.prototype.isBomb = false;
