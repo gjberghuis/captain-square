@@ -1,14 +1,19 @@
-function Tile(x, y, ctx) {
+function Tile(x, y, ctx, tileSize) {
     this.x = x;
     this.y = y;
+    this.x2 = 0;
+    this.y2 = 0;
     this.ctx = ctx;
+    this.tileSize = tileSize;
 };
 
 Tile.prototype.draw = function () {
     if (typeof (this.ctx) === 'object' && this.ctx.canvas) {
         this.ctx.beginPath();
         this.ctx.fillStyle = 'black';
-        this.ctx.fillRect(this.x, this.y, 25 - 1, 25 - 1);
+        this.x2 = this.tileSize - 1;
+        this.y2 = this.tileSize - 1;
+        this.ctx.fillRect(this.x, this.y, this.x2, this.y2);
     }
 };
 
@@ -38,7 +43,12 @@ Tile.prototype.checkBomb = function () {
         this.ctx.fillStyle = 'black';
         this.ctx.fill();
         this.ctx.stroke();
-
+    } else {
+        this.ctx.font = "10px Comic Sans MS";
+        this.ctx.fillStyle = "black";
+        this.ctx.textAlign = "center";
+        this.ctx.fillText(this.numberOfNeighbours, this.x + (this.x2 / 2), this.y + (this.y2 / 2));
+        this.ctx.dar
     }
 }
 
@@ -58,3 +68,4 @@ Tile.prototype.isBomb = false;
 Tile.prototype.isFlagged = false;
 Tile.prototype.isRevealed = false;
 Tile.prototype.isCorrect = false;
+Tile.prototype.numberOfNeighbours = 0;
