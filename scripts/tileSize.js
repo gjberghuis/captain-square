@@ -47,7 +47,7 @@ Tile.prototype.checkBomb = function () {
         this.ctx.font = "10px Comic Sans MS";
         this.ctx.fillStyle = "black";
         this.ctx.textAlign = "center";
-        this.ctx.fillText(this.numberOfNeighbours, this.x + (this.x2 / 2), this.y + (this.y2 / 2));
+        this.ctx.fillText(this.numberOfNeighbours, this.x + (this.x2 / 2), this.y + (this.y2) / 2);
         this.ctx.dar
     }
 }

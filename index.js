@@ -1,23 +1,3 @@
-let game = (() => {
-    let canvas = document.getElementById('canvas'),
-        ctx = canvas.getContext('2d'),
-        game;
-
-    var init = () => {
-        canvas.oncontextmenu = function (e) {
-            e.preventDefault();
-        };
-
-        board.init(canvas, ctx);
-    };
-
-
-
-    return {
-        init: init
-    }
-})();
-
 let board = (() => {
     let width,
         height,
@@ -158,6 +138,12 @@ let board = (() => {
         }
     };
 
+    var revealAllTiles = () => {
+        tiles.forEach((tile) => {
+            tile['tile'].checkBomb();
+        });
+    };
+
     return {
         init: (canvas, ctx) => {
             this.canvas = canvas;
@@ -165,9 +151,42 @@ let board = (() => {
             initBombs();
             renderNumbers();
             initEvents();
-        }
+        },
+        revealAllTiles: revealAllTiles
     }
 })();
+
+let controls = (() => {
+    var init = () => {
+        document.getElementById('button-reveal-all-tiles').onclick = function () {
+            board.revealAllTiles();
+        };
+    };
+
+    return {
+        init: init
+    }
+})();
+
+let game = (() => {
+    let canvas = document.getElementById('canvas'),
+        ctx = canvas.getContext('2d'),
+        game;
+
+    var init = () => {
+        canvas.oncontextmenu = function (e) {
+            e.preventDefault();
+        };
+
+        board.init(canvas, ctx);
+        controls.init();
+    };
+
+    return {
+        init: init
+    }
+})();
+
 
 (function () {
     "use strict";
